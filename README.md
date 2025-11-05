@@ -45,11 +45,19 @@ The tracker monitors 10 categories of authoritarian behavior:
 
 ## Data Source
 
-The website uses `trumpactions.csv` which contains:
+The website uses a **normalized SQLite database** (`trumpactions.db`) with:
 - **1,669 documented actions**
+- **10 threat categories** in their own table with descriptions
+- **2,682 action-category relationships** (many-to-many)
 - Date, title, and source URL for each action
-- Category flags indicating which threat categories apply
-- Data spans from Trump's presidency through 2025
+- Data spans from January 20 - November 3, 2025
+
+### Database Structure
+- **actions table:** Core action records
+- **categories table:** Threat category definitions
+- **action_categories table:** Junction table linking actions to categories
+
+See `DATABASE_SCHEMA.md` for detailed schema documentation.
 
 ## How to Use
 
@@ -72,10 +80,12 @@ The website uses `trumpactions.csv` which contains:
 
 ## Technology
 
-- Pure HTML, CSS, and JavaScript (no dependencies)
-- Client-side CSV parsing
+- Pure HTML, CSS, and JavaScript
+- **sql.js** - SQLite compiled to WebAssembly for in-browser database queries
+- Client-side data processing (no server required)
+- Normalized relational database schema
 - Responsive design for mobile and desktop
-- Fast and lightweight
+- Fast and lightweight (733KB database)
 
 ## Purpose
 
@@ -106,6 +116,14 @@ To add new actions:
 2. Ensure accurate categorization
 3. Include credible source URLs
 4. Maintain chronological order
+5. Regenerate the database:
+   ```bash
+   python3 create_db.py
+   ```
+6. Copy the new database to the docs folder:
+   ```bash
+   cp trumpactions.db docs/
+   ```
 
 ---
 
