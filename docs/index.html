@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Actions Tracker - Understanding Democratic Threats</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Trump Actions Tracker</h1>
+            <p class="subtitle">Documenting threats to democracy, institutions, and civil rights</p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+            <button class="nav-btn" data-view="timeline">Timeline</button>
+            <button class="nav-btn" data-view="browse">Browse All</button>
+            <button class="nav-btn" data-view="categories">By Category</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Dashboard View -->
+        <section id="dashboard" class="view active">
+            <div class="stats-grid">
+                <div class="stat-card total">
+                    <h3>Total Actions</h3>
+                    <div class="stat-number" id="total-actions">0</div>
+                </div>
+                <div class="stat-card most-common">
+                    <h3>Most Common Category</h3>
+                    <div class="stat-text" id="most-common">Loading...</div>
+                </div>
+                <div class="stat-card date-range">
+                    <h3>Date Range</h3>
+                    <div class="stat-text" id="date-range">Loading...</div>
+                </div>
+            </div>
+
+            <div class="category-overview">
+                <h2>Threat Categories Overview</h2>
+                <div id="category-stats" class="category-stats-grid"></div>
+            </div>
+
+            <div class="recent-actions">
+                <h2>Most Recent Actions</h2>
+                <div id="recent-actions-list"></div>
+            </div>
+        </section>
+
+        <!-- Timeline View -->
+        <section id="timeline" class="view">
+            <div class="filters">
+                <h2>Timeline of Actions</h2>
+                <div class="filter-controls">
+                    <label>
+                        Filter by Category:
+                        <select id="timeline-filter">
+                            <option value="all">All Categories</option>
+                        </select>
+                    </label>
+                    <label>
+                        Sort by:
+                        <select id="timeline-sort">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div id="timeline-content" class="timeline-list"></div>
+        </section>
+
+        <!-- Browse All View -->
+        <section id="browse" class="view">
+            <div class="filters">
+                <h2>Browse All Actions</h2>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search actions by title or description...">
+                </div>
+                <div class="filter-controls">
+                    <label>
+                        Filter by Category:
+                        <select id="browse-filter">
+                            <option value="all">All Categories</option>
+                        </select>
+                    </label>
+                    <label>
+                        Items per page:
+                        <select id="items-per-page">
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="all">All</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div id="browse-content"></div>
+            <div id="pagination" class="pagination"></div>
+        </section>
+
+        <!-- Categories View -->
+        <section id="categories" class="view">
+            <h2>Actions Grouped by Threat Category</h2>
+            <p class="category-description">
+                These categories help identify patterns of authoritarian behavior and threats to democratic institutions.
+            </p>
+            <div id="categories-content"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Data last updated: <span id="last-update"></span></p>
+            <p>This tracker documents actions that threaten democratic norms, institutions, and civil rights.</p>
+        </div>
+    </footer>
+
+    <!-- SQL.js library for SQLite database in browser -->
+    <script src="https://sql.js.org/dist/sql-wasm.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
