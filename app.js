@@ -32,8 +32,41 @@ const categoryShortNames = {
     'Anti-immigrant or Militarised Nationalism': 'Anti-Immigrant'
 };
 
+// Theme management
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
+}
+
+// Render hero section with category counts
+function renderHero() {
+    const container = document.getElementById('hero-categories');
+    const categoryStats = getCategoryStats();
+
+    container.innerHTML = categoryStats.map(stat => `
+        <div class="hero-category">
+            <div class="hero-category-name">${stat.short_name}</div>
+            <div class="hero-category-count">${stat.count.toLocaleString()}</div>
+        </div>
+    `).join('');
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    setupThemeToggle();
     loadDatabase();
     setupNavigation();
 });
@@ -53,6 +86,9 @@ async function loadDatabase() {
 
         // Load all actions into memory for client-side operations
         loadAllActions();
+
+        // Render hero section
+        renderHero();
 
         // Initialize all views
         renderDashboard();
