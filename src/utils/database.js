@@ -8,7 +8,7 @@ export async function initDatabase() {
       locateFile: file => `https://sql.js.org/dist/${file}`
     });
 
-    const response = await fetch('/trumpactions.db');
+    const response = await fetch('./trumpactions.db');
     const buffer = await response.arrayBuffer();
     db = new SQL.Database(new Uint8Array(buffer));
 
