@@ -2,12 +2,12 @@
 
 ## ✅ Files Ready for Deployment
 
-The website files have been prepared and pushed to the repository in the `/docs` folder:
-- `docs/index.html` - Main website
-- `docs/styles.css` - Styling
-- `docs/app.js` - Interactive functionality
-- `docs/trumpactions.csv` - Data (1,669 actions)
-- `docs/.nojekyll` - Prevents Jekyll processing
+The website has been migrated to **React with HeroUI** and files are ready in the `/docs` folder:
+- `docs/index.html` - Main entry point
+- `docs/assets/` - Compiled JavaScript and CSS bundles
+- `docs/trumpactions.db` - SQLite database (733KB)
+- Built with React, HeroUI (formerly NextUI), and Tailwind CSS
+- Fully client-side, no server required
 
 ## 🚀 Enable GitHub Pages
 
@@ -31,7 +31,7 @@ To deploy the website, you need to enable GitHub Pages in your repository settin
    - Select **"Deploy from a branch"**
 
 5. **Select the branch and folder:**
-   - Branch: `claude/trump-actions-website-011CUpkfjJf9qjzcZ717s3Xi`
+   - Branch: `claude/migrate-ton-use-011CUta4JhCFdF8LVdYarLvb` (or your main branch)
    - Folder: `/docs`
    - Click **Save**
 
@@ -81,16 +81,17 @@ After enabling GitHub Pages, check:
 **Site not loading?**
 - Wait 2-3 minutes after enabling Pages
 - Check that the branch and folder are correctly selected
-- Ensure the `.nojekyll` file is present in the docs folder
+- Verify the build was successful (`npm run build`)
 
 **404 error?**
 - Verify the branch name is correct in Settings
 - Check that `/docs` folder is selected, not root `/`
+- Ensure `vite.config.js` has `base: './'` for relative paths
 
 **Data not loading?**
 - Open browser console (F12) to check for errors
-- Verify `trumpactions.csv` is in the docs folder
-- Check for CORS or file path issues
+- Verify `trumpactions.db` is in the docs folder (733KB file)
+- Check browser compatibility (modern browsers required for WebAssembly)
 
 ## 📧 Need Help?
 
@@ -99,8 +100,35 @@ If you encounter issues:
 2. Verify all files are present in the `/docs` folder
 3. Try deploying from the main branch instead
 
+## 🔧 Rebuilding and Deploying Updates
+
+When you make changes to the source code:
+
+1. **Rebuild the application:**
+   ```bash
+   npm run build
+   ```
+
+2. **Copy the database:**
+   ```bash
+   cp trumpactions.db dist/
+   ```
+
+3. **Update the docs folder:**
+   ```bash
+   rm -rf docs/* && cp -r dist/* docs/
+   ```
+
+4. **Commit and push:**
+   ```bash
+   git add .
+   git commit -m "Update deployment"
+   git push
+   ```
+
 ---
 
-**Current Branch:** `claude/trump-actions-website-011CUpkfjJf9qjzcZ717s3Xi`
+**Current Branch:** `claude/migrate-ton-use-011CUta4JhCFdF8LVdYarLvb`
+**Technology:** React 18 + HeroUI + Vite
 **Files Location:** `/docs` folder
 **Ready to Deploy:** ✅ Yes

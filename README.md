@@ -64,23 +64,37 @@ See `DATABASE_SCHEMA.md` for detailed schema documentation.
 ### Local Development
 
 1. Clone the repository
-2. Open `index.html` in a web browser, or
-3. Run a local server:
+2. Install dependencies:
    ```bash
-   python3 -m http.server 8000
+   npm install
    ```
-4. Navigate to `http://localhost:8000`
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Navigate to `http://localhost:5173` (or the URL shown in the terminal)
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist` directory.
 
 ### Navigation
 
-- Use the top navigation buttons to switch between views
+- Use the top navigation tabs to switch between views
 - Use filters and search to find specific actions
 - Click on action links to read the full source articles
-- Hover over category badges to see full descriptions
+- All category badges are color-coded for easy identification
 
 ## Technology
 
-- Pure HTML, CSS, and JavaScript
+- **React 18** - Modern UI library with hooks
+- **HeroUI (formerly NextUI)** - Beautiful, accessible React component library
+- **Tailwind CSS** - Utility-first CSS framework
+- **Vite** - Fast build tool and development server
 - **sql.js** - SQLite compiled to WebAssembly for in-browser database queries
 - Client-side data processing (no server required)
 - Normalized relational database schema
@@ -120,9 +134,11 @@ To add new actions:
    ```bash
    python3 create_db.py
    ```
-6. Copy the new database to the docs folder:
+6. Rebuild and deploy:
    ```bash
-   cp trumpactions.db docs/
+   npm run build
+   cp trumpactions.db dist/
+   rm -rf docs/* && cp -r dist/* docs/
    ```
 
 ---
