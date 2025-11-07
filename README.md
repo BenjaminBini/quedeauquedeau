@@ -134,10 +134,13 @@ To add new actions:
    ```bash
    python3 create_db.py
    ```
-6. Rebuild and deploy:
+6. Copy the database to the public folder:
+   ```bash
+   cp trumpactions.db public/
+   ```
+7. Rebuild and deploy:
    ```bash
    npm run build
-   cp trumpactions.db dist/
    rm -rf docs/* && cp -r dist/* docs/
    ```
 

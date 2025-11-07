@@ -109,9 +109,9 @@ When you make changes to the source code:
    npm run build
    ```
 
-2. **Copy the database:**
+2. **Ensure the database is in the public folder:**
    ```bash
-   cp trumpactions.db dist/
+   cp trumpactions.db public/
    ```
 
 3. **Update the docs folder:**
